@@ -1,4 +1,6 @@
-# projects
+# smart airfurifier
 
-1. Python code using image machine learning for smart airpurifier
+Python code using image machine learning for smart airpurifier
+
+
 
