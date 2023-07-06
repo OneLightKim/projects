@@ -1,0 +1,99 @@
+
+12월21까지 한 그래프를
+####
+컬럼 추리기 -> 겨울, 여름 크기 똑같이 -> 3x4그래프로 시각화, 
+-> soclen을 초로 바꾸기, -> 정규화를 안해보고 나타내기
+
+####
+컬럼 포함:
+쓰로틀
+히팅파워
+에어컨파워
+
+AB합쳐서 커브추가
+A,B따로
+AB합친거
+
+####
+근사식 만들기
+https://m.blog.naver.com/choi_s_h/221730719621
+https://machinelearningmastery.com/curve-fitting-with-python/
+커브피트 함수를 통해서 그리기
+식도 추출
+(선으러)
+........
+x,y,z가 몇일떄 y가 몇을 넘어서 조절을 해야한다.. 가 추출
+식을통해
+
+정 안되면 2d로 여러개
+
+###
+근사식 추출, 발표 순서 등등 정리
+
+커브피트...
+https://super-master.tistory.com/75?category=421683 이거 참고해서 어떤식을 썻는지 적기
+-log함수, 지수함수 역함수,
+https://blog.naver.com/choi_s_h/221733490097
+https://blog.naver.com/PostView.nhn?blogId=choi_s_h&logNo=221730719621
+1,2,3차 근사식
+
+Throttle 그래프에는 0값을 빼고
+
+###
+모든 값들을 합쳐서 하나의 근사식으로
+https://stackoverflow.com/questions/31800597/using-matplotlib-to-plot-4d-fitted-surface
+
+
+####
+모터토크, 배터리 온도 등등 제어할 수 없기에 제거,
+
+그래프 요소 3개
+...
+히터 관련 유사한 그래프 살펴보고
+
+여름, 겨울 그래프 ppt에 그대로 쓰고 근사할 때만 합쳐서 함
+
+longitu... 도 포함해서 근사식 3~4개 그리고 선정한 그래프들 얘기하기
+
+soclen throttle, heatingpowercan, airconpower, longitu...
+
+종횡가속도은 elevation이랑 비교할때 -면 오르막길 올라가고 +면 내려오는 것 같음
+
+종횡가속도를 오르막길 내리막길을 판단하는 것으로 식별이 되었으나
+내리막길일때 여유로운 상황이라 반영할려 했으나 식이 복잡해서 포함시키지 않았다.
+
+복합적으로 식을 그린 이유는 하나의 값으로 어느정도 영향인지 알기가 애매해서
+복합적인 관계를 통해..
+
+
+
+####
+###파이썬 대시보드
+
+파이썬 Threading
+sum에 초값, .. 
+쓰레드 내부에서 sleep(1)로 1초 딜레이..
+느린감이 있으면 0.9초로..
+쓰레드 내부에서는 데이터에서 1초 단위로 긁어와서
+.....
+파라미터에서 1~ ~~초 갱신
+
+##
+리얼타임 csv에서 velocity는 게이지, throttle은 막대그래프로 막 출력
+
+#y값이 1000보다 높으면 연료소모가 큽니다.
+# 1000보다 낮으면 공백으로
+
+y값 기준 잡는게 중요할듯
+
+#분석이랑 상관없어도 운전자에게 용의하도록 출력
+Throttle, velocity, battery Temperature, Ambient Temperature.. 뭐 등등..
+
+박스플롯도 여유가 된다면 출력
+
+
+###############
+체크박스, 라디오박스 
+
+
+

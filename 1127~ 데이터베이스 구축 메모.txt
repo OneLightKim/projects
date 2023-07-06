@@ -1,0 +1,533 @@
+###1127
+
+1. DB구축을 리눅스 환경에서 할 예정
+2. 구축된 DB를 장고를 통해 웹 화면에 import 예정
+3. ERD 이미지화 방법을 알아보는중,
+	csv파일을 테이블화 하는 방법 또한 알아보는중
+	csv파일을 먼저 bench에서 테이블화 성공 한 후 
+	그 명령어를 리눅스 환경에서 적용 예정
+	
+	리눅스 환경 mysql에서 데이터베이스에 csv테이블을 받는 방법은?
+
+
+## mysql 로그인
+# mysql -u root -p
+# Bigdata123!!
+
+## 파일 찾기
+# find / -name mysql
+# 파일 위치는 일단 여기쯤인걸로 파악
+# /home/kwlee/.vscode-server/extensions/ms-python.vscode-pylance-2022.10.10/dist/bundled/stubs/django-stubs/contrib/gis/db/backends/mysql
+
+
+##Mysql Workbench
+cretae schema battery_datasets;
+
+##Jupyter lab
+#Trip파일을 메모장으로 열어 sep=;로 나누기 시전.
+#나누기는 성공적, utf-8형식으로 변환하니 txt파일로 저장이 됨,
+ sep=;를 추가하여 나누는 것엔 성공
+#데이터 파일을 보니 속성값에 '캜'이라는 한글이 있음
+#'캜'이라는 단위는 END였음 .. 메모장에 들어가서 바꿧음
+
+
+
+### 11.28
+#다운로드 받은 csv파일 메모장에서 utf-8, 모든파일 형식으로 저장
+
+1. python에서 다운로드받을 72개 csv파일의 캜이라는 단어를 END로 바꿀것임
+2. workbench에서 데이터셋을 확인
+3. 리눅스환경 mysql에 업로드 예정
+
+..........................................................................................
+
+DB구축을 하기 어려움
+비슷한 데이터 집합에 ER다이어그램 보여주기가 애매
+
+아니면 편집합 데이터를 DB에 저장,
+DB데이터를 쥬피터랩에 적용 및 분석
+
+
+그러기 위해서는 for문을 사용한 함수 및 클래스 정의가 필요
+.....
+
+datasets들 행 계수가 제각각임
+....
+concat으로 합칠까?
+
+
+일단 컬럼 값들부터 고치는 것부터 한다.
+kaggle에서 TripA01~32까지 다운로드 받은 후, 모든파일 형식 및 UTF-8로 인코딩한다.
+...... 큰일났다. 각 데이터셋들의 컬럼수들이 다르다.
+
+
+##################################
+북마크 바의 리스트들을 가져오고 싶어서 구글 크롤링
+
+#driver = webdriver.Chrome()이 오류가 남
+#WebDriverException: Message: unknown error: Chrome failed to start: exited abnormally.
+  (unknown error: DevToolsActivePort file doesn't exist)
+  (The process started from chrome location /usr/bin/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+그래서 일단 
+#sudo yum install google-chrome-stable 을 침 ... 크롬 버전 업데이트
+#google-chrome --version을 하니 107.0.5304.121로 됨
+#
+
+
+
+Q : 파일질라 확인방법  : 빠른연결 sftp kwlee@
+Q : 크롬드라이버 옛날 버전 삭제 방법 : 없는듯.. 연결 안됨
+그래서 윈도우에서 실행함
+	1. 아나콘다 프롬프트 실행
+	2. conda activate scrappnig
+	3. jupyter lab을 킴
+	4. 위치는 user/user/kim
+
+
+##########################################
+
+11.29
+#데이터셋 정제 방법
+1. 중요하다고 생각되는 컬럼을 뽑음
+2. 그것을 기준으로 중요도가 높은 파일들을 뽑아 합침
+
+
+3. 작은컬럼수 셋에 있는것들이 많은 컬럼 데이터셋에서는 누락돼있지않을듯
+
+
+
+...........
+
+
+1. TripB데이터셋들 인코딩
+2. 데이터셋들 컬럼 확인 23개로 최소화..
+3. 데이터셋 컬럼간 중요도 테스트
+4. 데이터셋들 몇개 골라서 합치기
+
+
+이 데이터셋들을 git으로 올리자
+
+
+##################################################
+11.29 카페 밤
+
+B데이터셋들은 모두 48개의 속성을 가지고 있다.
+이 데이터셋들을 확인할 것이다.
+
+################################################
+
+11.30
+목표 : 데이터 정제 및 git,sql에 업로드
+	화면설계(ppt로)
+
+1. B데이터셋은 TripB38 콜럼 값이 일정하지 않기에 드롭한다.
+2. B데이터셋은 concat으로 합친다
+
+1. A데이터셋 TripA21을 제거
+2. 속성수를 맞춘 뒤에 concat으로 합친다.
+
+#data정제는 먼저
+#데이터셋들을 합친다.
+#시각화를 통한 상관관계를 파악하여 column들을 드롭한다.
+#그다음 null값을 채운다.
+#그다음 라벨인코더가 필요하면 하고
+#train,test셋을 비교하여 정확도를 구한다.
+
+
+
+Q1. RandomForestRegressor,와 classifier의 차이는?
+A. 0,1로 이루어져있는게 classifier
+
+################################################
+12.01
+목표 : 
+	1.데이터 정제 및 git,sql(linux)에 업로드
+	2.화면설계(ppt)
+	
+	#이전에 28개 속성 데이터셋으로 상관관계 분석
+
+	#데이터 정제는.
+	#필요없는 콜럼 드랍, 컬럼명 고치기
+	#데이터셋들을 합친다 (합치는 방식 생각)
+	#null값 채우고 labelencoder로 오브젝트 형태들을 지움
+	#상관계수 분석으로 배터리 온도에 영향을 끼치는 변수들을 확인
+	
+==> #이 아닌 속성은 지울것
+16                 Heating Power LIN [W]
+17           Requested Heating Power [W] #
+18                     AirCon Power [kW] #
+19                         Heater Signal #
+20                    Heater Voltage [V]
+21                    Heater Current [A]
+22               Ambient Temperature [캜] #
+23    Coolant Temperature Heatercore [캜]
+24     Requested Coolant Temperature [캜] #
+25         Coolant Temperature Inlet [캜]
+26        Heat Exchanger Temperature [캜] #
+27          Cabin Temperature Sensor [캜] #
+
+
+산업체 : 고생하고 노예
+전문연구원 : 실력만 있으면 삭감도 안되고 좋음
+#############################################
+1202
+
+최준희 연구원님 도움 정리
+1. 데이터 전처리에서 속성 정리에 대한 전문적인 조언을 LG화학 지인을 통해 제공해주심
+2. 분석된 툴을 DB에 insert, 그리고 화면설계에서 도표들을 제공
+3. 데이터 정제 방법.. EXCEL사용시 편하거나, for문을 통한 데이터셋들 정제를 대략적인 지표로 제공
+ 또한 데이터들을 합쳐서 1초별로 카운트하여 평균값으로 합하는 견해 제공
+4. 최종 목표에 대해서 조금 수정해주셧다. DB에 저장된 데이터를
+대시보드를 통해 시각화하며 주행요인들에 대한 경고문을 출력하는
+사용자에게 편리한 쪽으로 추천을 해주셨다.
+
+##데이터 정제 순서
+배터리 온도에 직접적인 영향을 주는 컬럼을 선정
+새로운 csv파일 만들고 그곳에 붙여넣기.
+그 csv파일을 모두 합치고
+초단위로 평균내어 압축을 한다.
+
+#컬럼을 선정
+직접적인 영향을 주는 컬럼(TripA) : 
+Time[S], Throttle [%]
+Battery Voltage [V], Battery Current [A]가 높으면 발열이 높다.
+,Battery Temperature ['c],
+SoC [%]
+
+Local interconnect network, controller airear network는
+각각 LIN, CAN으로 A데이터셋에서는 0값으로 버릴 수 있지만
+B데이터셋에서는 수치가 변형적이어서 유의미한 값을 가질 수 있다.
+
+max. , min. Battery Temparature, max,min SoC는 참고만
+
+#컬럼 선정 배경지식과 이유들 .. (출처 : LG화학 현업자(최준희 선임연구원님 지인))
+제조사는 배터리와 내외부를 차단하는게 목적 그러기에 내외부 온도는 상관이 없다.
+만약 내외부 온도로 유효한 지표 차이를 보인다면 그것은 불량일 것
+
+자동차 속도와 배터리온도와는 관련이 없다.
+배터리 안에는 냉각수가 들어간다. 그래서 바깥 공기와 닿을 일이 거의 없다.
+바깥에서 바람이 아무리 많이 불어도 배터리 온도에 영향을 안 준다.
+그리고 어짜피 냉각수가 잡아주니깐 속력은 관련이 없는 걸로. (공기가 식혀주질 않는다.)
+히터를 언제 쓰냐? 냉각수는 온도 제어에 그렇게 효과가 없다.
+냉각수는 온도제어를 하기에 유의하다.
+비열은 온도 변화에 큰 영향을 주기 어렵다는 견해이시다.
+
+#최종 목표
+최종적으로 도출하고 싶은 결론은 상관관계 분석 이상인 인과관계 도출을 통한 사용자에게 견해를 제공
+하지만 개선안을 실현시키는 것은 현실적으로 어렵기에 문서로 대체할 생각
+...
+fix : 웹화면보다는 DB에 저장된 데이터 1초마다 대시보드에 그래프로 출력
+     ex)  암페어가 커런트가 높다.. 속도와 암페어 등등이 높은 값이 나오면
+	경고문을 출력.....
+
+DB에 저장된 데이터를 통해 1초마다 대시보드에..
+
+행별로 읽어와서 대시보드에 출력..
+ex) 느리게 읽어온다면 0.5초단위로 2번씩?
+
+1. 배터리가 0.1퍼센트씩 감소하는데, 1퍼센트가 감소할때의 평균 Throttle값을 구한다.
+2. or 배터리가 1퍼센트씩 감소할때의 시간,?
+쓰로틀을 쌔게 밟으면 배터리가 빨리다는것을 출력
+쓰로틀을 0.1씩 밟았을때 100초, 근데 0.5씩 밟았을때 50초면 포인트로 사용이 가능하다.
+
+ ==> 대시보드에 연계를 할 포인트들을 선정하여 경고문을 만든다.
+
+온도로 결과를 내는 쪽은 어려울 것 같다.
+쓰로틀이나 연비쪽으로 해서 대시보드를 내는 쪽으로 가는 것이 좋을 것 같다.
+
+$$결과
+#### 배터리 퍼센트 감소하는 부분에 어느 부분이 영향이 큰가....를 잘 판단. 
+#### 나머지는 보여지는 부분에 대해서 중요도를 둔다.
+
+
+유사도 식은 코사인유사도를 사용하는 것을 .... 값들을 매칭시켜서 계산... (컬럼간 유사도)
+
+B데이터셋은 특별해보이는것만 추리기
+
+
+
+#####################################
+1203
+
+1. TripB데이터셋 정리
+2. A,B 합쳐서 1초단위로 평균(타임 결측치 유의)
+3. DB에 TripA,TripB데이터셋 저장
+4. 데이터 상관관계 분석... throttle과 ~ 기준으로
+
+Time, Throttle, BatteryVoltage, BatteryCurrent, Battery Temparature
+,SoC
+
+
+
+######################################
+1204
+
+0. 파일을 Time 1초 단위로 합치기 .. 평균값으로.....
+	평균값으로 합치기 이전 정규화 과정이 필요해 보임
+	이상치를 가려내서 제거 or MinMaxScaler등 사용이 필요해 보임
+	튀어다니느 값들을 어떻게 할지 논의 필요
+1. DB에 파일 넣기..
+2. python 상관관계 분석..(DB데이터셋을 1초단위로 상관분석)
+3. 시각화 (1초단위)
+4. Dash보드 만들기
+
+
++.. 1. TripB파일 하나 뽑아서 상관분석
+    2. 실시간 분석이 되는 DB구축
+
+
+#####################################
+1205
+데이터셋 상관분석을 통해 콜럼들 추려내기
+
+1. TripB셋은 모든 데이터를 합쳐서 mean값으로 상관분석
+2. 상관계수가 높은 것만 남겨두고 추려냄
+#해결
+
+
+1. TripA셋은 데이터 컬럼을 먼저 맞추고
+2. 상관계수가 높은 것을 두고 추려냄
+#
+
+######################################
+1206
+
+1. 어떤 실시간 분석이 가능한 DB를 쓸 것인가
+2. DB,분석코드,대시보드 연결을 어떻게 할 것인가
+.... sql의 데이터를 장고에, 장고에서 데이터를 분석하고
+   장고에서 분석된 데이터를 
+
+https://www.youtube.com/watch?v=MoOxXXonPVM
+
+1. sql에 데이터 저장, django와 데이터 연결
+   연결된 데이터를 분석,
+	구글애널리틱스 데시보드에 띄우기
+2. 콜럼은 상관관계를 기준으로 짜르기
+	스로틀, 히터, soc 이 세 가지를 대시보드 화면에..
+	
+
+
+https://www.youtube.com/watch?v=-FWszJyX8JM
+(설명 영상)
+구글애널리틱스 .. 
+new => add report => analytics
+
+
+
+#######################################
+1207
+
+리눅스or윈도우 DB를 장고 대시보드에,,
+키바나 대시보드 사용가능..
+
+키바나와 DB를 연결 .. 분석한 데이터 시각화하여 띄우기
+mysql api 끌어오는게 있음. 연결함
+elastic, kibana연결
+
+#######################################
+1208
+
+1. 아나콘다 프롬프트에서 대시보드를 사용함
+	python파일로 저장 후 실행
+ 	...
+
+1. 캐글보고 컬럼별 상관분석
+2. mysql만들고 파이썬으로 전송  X
+3. 동적대시보드 보기
+
+상관분석 : 
+-  def combine_csvs() : 통합 파일 모듈화하기
+-  plot_dataframe_subplots : df를 컬럼 enumerate하여
+	for문 돌리기... subplot으로 여러개의 그림을 하나의 그림에
+	플롯으로 띄우기 idx는 인덱스, key는 컬럼명
+	그리드 있게하고 ylabel, xlabel각각 key, 컬럼명으로 선언
+	
+ambient temperature, 
+soc뛰는 부분이 있는데 행 잘린건가..?
+aircon power 넣은건가?
+
+
+
+
+
+
+########################################
+1209
+
+1. 외기, 내기 난방 ambient temperature에 따라서
+	문구 출력
+2. 에어컨
+3. 스로틀
+4. ambient temperature
+5. battery voltage [V] 사용
+
+
+#12월 16일
+메이아이 가서 연구원님께 도움 받기
+
+#12월 30일
+10분 발표에 5분 시연
+
+#다중선형회귀방정식 사용하여 강도에 대한 데이터 오차 줄이기
+
+
+#체크박스
+여름:Throttle [%],Ambient Temperature [C],AirCon Power [kW]
+겨울:Throttle [%],Ambient Temperature [C],Heater Voltage [V]
+
+#강도에 대한 체크박스
+
+#SoC 예측
+
+
+장고, 파이썬 활용...
+
+1. 기획서
+2. 변수 바꿧을떄 차이점 뚜렷하게...
+
+
+######################################
+12.11
+
+1. 전처리 과정 및 train test과정 확인
+2. 대시보드 대략적인 화면설계 해보기
+3. 동적대시보드 실행해보기
+
+
+데이터 아키텍쳐 한번 살펴보기
+
+
+##X_train, y_train나누는 이유
+Train과 validation데이터로 training을 하고 model을 만들고
+Test셋으로 모델을 평가한다.
+
+- train, validation : traindata로 training과정 진행, 이 과정에서
+	중간중간 평가하는 것을 validation data가 진행
+	그 결과로 최종모델이 나오게 된다.
+
+training과정에서 traindata와 validationdata로 평가를 하며
+(epoch주고 loss, acc검증)_ 모델을 training한다..
+- 그리고 최종적으로 모델이 한번도 보지 못한 데이터를 평가한다.
+그 데이터가 Test데이터이다.
+
+# X_train, X_test, y_train, y_test의 의미는..?
+- test.csv는 최종적으로 1번만 사용하는 data이다.
+- train.csv를 통해 traindata, validationdata를 나눈다.
+- python sklearn은 train_test_split이라는 메소드를 제공하여 쉽게 사용이 가능하다.
+- X_train,y_train은 traindata가 된다.
+- X_test, y_test는 validation data가 된다.
+
+- X는 feautre, y는 label이다. y=ax+bx와 같이
+	y는 여러 X들로 인해 정해지는 값이다.
+	iris데이터를 예로 설명하자면 3개의 품종이 y이고
+	그것을 결정해주는 feature가 X가 된다. 여기서 features는 4개라 할 수 있다.
+	(sepal_length, sepal_width, petal_length..등 4개임)
+
+-이후 X_train,y_train, test들 나누기는 참고 그림을 통해 알아보자.
+
+
+#################################
+12.12
+## 10분발표.. 
+	전처리 과정 4분, 모델 구축 과정2분 , 대시보드 설계 과정 2분, 대시보드에 띄워지는것2분
+## 구현과정
+	화면 캡쳐를 통한 동영상으로 진행.. DB를 보여주고 RUNSERVER, RUNSERVER된 웹을 보여주며 
+	
+
+
+1. 대시보드 설계만 구체적으로
+2. pandas책보고 좀
+
+
+
+# 장고 한번 실행
+# 
+
+
+
+##################################
+12.13
+
+1. 대시보드 설계 :
+	그래프를 출력하되 변수의 일정한 값을 설정하여 비교
+	여러개 선택하는 것은 3차원 그래프?
+2. 기획서 : 
+https://www.miricanvas.com/design/11mynfm?sheetW=MTkyMA%3D%3D&sheetH=MTA4MA%3D%3D&templateTypeId=cHJlc2VudGF0aW9u&templateIdx=NjQ4NzY%3D
+미리캔버스
+
+3. 깃 연결을 하고 파일들 깃에 올려놓기
+
+
+#진행상황
+	: 동운이형 유의미한 관계 확인을 위해
+	쓰로틀, 에어컨, 히팅 등의 값을 픽스하고 그에 따른
+	SoC를 모델로 예측함
+	예측이 너무 잘되어 히팅 외에 특이한 값을 찾지 못함
+
+########################################
+12,14
+
+1. 기획서 작성,
+2. 대시보드 화면 툴 하고 기획서에 올리기
+3. 깃에 넣어서
+
+raw데이터 기반 1초단위로 자름 다른 데이터들을
+
+6789?
+
+유스케이스 쓰기 : https://googry.tistory.com/2
+erd작성 : https://www.
+erdcloud.com/d/Cg7vBDKK6SgF8dwkA
+
+https://www.youtube.com/watch?v=j_gU13iyJSM
+https://www.youtube.com/watch?v=_Tq-9YBu_rg
+
+######################################
+12.15
+메뉴 구성도부터 기획서 작성 불가능
+
+1. AWS연결하기
+2. 화면 대략적인 틀 구현해보기
+3. 기획서 수정하기
+
+
+
+######################################
+12.19
+
+isna, velocity옮기고
+뽑은 데이터 reindex
+
+
+
+###########################################
+12.23
+
+퀵사이트 주소
+https://ap-northeast-2.quicksight.aws.amazon.com/sn/start/analyses
+
+
+
+############################################
+app.callback 사용법
+http://bigdata.dongguk.ac.kr/lectures/datascience/_book/a4.-dash%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-python-dashboard.html
+
+div나누기
+https://dacon.io/forum/406181
+
+dash_Test1.py 참고
+https://kibua20.tistory.com/216
+
+
+
+
+
+#########
+12.26
+
+12.16V2.0보기
+
+
+
+
+

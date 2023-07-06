@@ -1,0 +1,1 @@
+데이터 병합시 ignore_index = True로 인덱스 중복 없애기

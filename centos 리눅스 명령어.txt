@@ -1,0 +1,26 @@
+리눅스 명령어
+cd
+ls
+rm -rf
+cat
+which
+mkdir
+cp, 
+wget 다운로드 url
+ps -ef | grep "검색할문자열"
+이외에 포트삭제
+포트 추가, 서비스 추가 삭제,
+firewall -cmd --reload
+
+ssh 사용자아이디@접속할주소 [-p포트번호] ..
+외부에서 ssh주소에 접속
+
+unzip
+
+==>  yum 옵션 명령 패키지명 <==
+yum remove [패키지명]
+yum list
+yum list updates (업데이트 된 패키지만 확인)
+yum list available(설치된 패키지 리스트들 확인)
+
+yum update [패키지명] .

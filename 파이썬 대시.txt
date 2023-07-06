@@ -1,0 +1,3 @@
+python dash
+
+fig.write_image()    만드 차트 이미지 저장

@@ -1,0 +1,57 @@
+윈도우 깃 연결
+
+scm설치
+https://www.bearpooh.com/57
+file:///C:/Program%20Files/Git/ReleaseNotes.html
+
+https://xangmin.tistory.com/104
+실행
+
+
+git init
+git remote add origin https://github.com/OneLightKim/Group6_2.git
+git add .
+git config --global user.email "git가입 이메일 주소"
+git config --global user.name "본인 git 닉네임"
+git commit -m "first_commit"
+git push origin master
+
+- git add ~파일 .. (커밋에 추가할 파일 )
+- git commit -m "커밋시에 메세지"
+햣
+
+git config --global core.autocrlf true (csv파일 업로드 시 오류 해결)
+
+- git 대용량 파일 업로드
+git lfs track "*.csv"
+git add .gitattributes
+
+
+============ 깃 업로드 순서 ============
+
+git add ~~추가
+git commit -m "매새지" 
+git push origin master
+git push -f origin master (강제 업로드)
+
+
+
+
+warning: in the working copy of '12.16.ipynb', LF will be replaced by CRLF the next time Git touches it
+떳을때
+git config --global core.autocrlf true
+
+깃 원격저장소의 파일을 삭제할 때
+git rm --cached 파일이름
+
+
+
+
+
+
+
+
+
+
+
+
