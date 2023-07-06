@@ -1,6 +1,8 @@
-# projects
+# Analysis of driving records
 
-1. Analysis of mushroom data using various analysis tools
-2. Python, aduino, android code using image machine learning for smart airpurifier
-3. make Dashboard by django to visualize 'analysis of driving record of BMW i3 hatchback" 
-4. Web xlsx, hwpx, pptx, pdf File Viewer running by django
+Through the django framework, dashboards were provided to users on the web.
+
+The composition is divided into three pages and consists of 
+- a driving record selection screen, 
+- a time series graph of major factors for the driving record,
+- a screen with a statement summarizing the user's driving record and providing problems with fuel efficiency degradation
