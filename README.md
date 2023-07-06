@@ -1,4 +1,4 @@
-# projects
+# analysis of driving records
 
 1. Analysis of mushroom data using various analysis tools
 2. Python, aduino, android code using image machine learning for smart airpurifier
