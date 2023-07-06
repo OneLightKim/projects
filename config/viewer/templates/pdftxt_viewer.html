@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/stylesheet/pptx_viewer.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class = 'container'>
+            <!-- <a href="http://www.mayeye.net/"><link href="{% static '/image/mayeyerogo.png' %}" class="logo"></a>-->
+            <a href="http://www.malyeye.net"><img src="{% static 'image/mayeyerogo.png' %}"></a>
+        </div>
+    </header>
+    <p><iframe src="{% static '/txt/pdf.txt' %}" width=1200 height=1000 frameborder=0 ></iframe></p>
+    <div class="div_home_bttn">
+        <button type="button" style="WIDTH: 60pt; HEIGHT: 30pt text-align=center;" onclick="location.href='/main'">선택창</button>
+    </div>
+</body>
+</html>
