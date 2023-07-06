@@ -1,0 +1,3 @@
+0 window open
+1 window half open
+2 window close
