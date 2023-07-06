@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header{
+            width:100%;
+            height:80px;
+        }
+        body{
+            margin: 0;
+        }
+        .container{
+            width:100%;
+            height:100%;
+            background-color: dimgray;
+        }
+        .title{
+            text-align:center;
+            vertical-align: middle;
+            padding-top: 15px;
+            /* padding-bottom: 20px; */
+            color:cornsilk;
+        }
+        .text1{
+            text-align:center;
+            vertical-align: middle;
+            padding-top: 20px;
+        }
+        .dropdown{
+            width:80%;
+            height:30px;
+            vertical-align: middle;
+            /* padding-top:10px; */
+        }
+        .div1{
+            position:absolute;
+            top:60%;
+            left:58%;
+            height:100px;
+            width:300px;
+            /* background-color: bisque; */
+            margin:-150px 0px 0px -250px;
+        }
+        .div2{
+            position:absolute;
+            top:45%;
+            left:27%;
+            height:300px;
+            width:320px;
+            /* background-color: bisque; */
+            margin:-150px 0px 0px -150px;
+        }
+        .button{
+            color:aliceblue;
+            background-color: dimgray;
+            font: icon;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title">자동차 주행기록 보고서</h1>
+        </div>
+    </header>
+
+   <form method="get" action="/main/" name="time">
+    <div class="div1">
+        <select class="dropdown" name="time">
+            {% for i in date %}
+            <option class="text1" value="{{i}}">{{i}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" class="button" value="선택">
+
+    </div>
+    <div class="div2">
+
+        <p style="font-size: 18px;">BMW i3 hatchback info
+            <li>가격 : 6,000~6,560만원</li>
+            <li>연료 : 전기</li>
+            <li>주행 : 248km 1회 충전 시</li>
+            <li>연비 : 복합 5.6km/kWh 도심 6.2, 고속 5</li>
+            <li>출력 : 125kW 모터 168hp (단순환산치)</li>
+            <li>용량 : 37.9kWh 배터리</li>
+        </p>
+        
+    </div>
+    
+   </form>
+</body>
+</html>

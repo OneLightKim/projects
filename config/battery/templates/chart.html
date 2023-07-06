@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <title>Document</title>
+    <style>
+        header{
+            width:100%;
+            height:80px;
+        }
+        body{
+            margin: 0;
+        }
+        .container{
+            width:100%;
+            height:100%;
+            background-color: dimgray;
+        }
+        .title{
+            text-align:center;
+            vertical-align: middle;
+            padding-top: 15px;
+            /* padding-bottom: 20px; */
+            color:cornsilk;
+        }
+        .text1{
+            text-align:center;
+            vertical-align: middle;
+            padding-top: 20px;
+        }
+        .text2{
+            text-align:center;
+            vertical-align: middle;
+            /* padding-top: 20px; */
+        }
+        .dropdown{
+            width:80%;
+            height:30px;
+            vertical-align: middle;
+            /* padding-top:10px; */
+        }
+        .div1{
+            position:absolute;
+            top:20%;
+            left:10%;
+            height:650px;
+            width:550px;
+            /* background-color: bisque; */
+            /* margin:-150px 0px 0px -250px; */
+        }
+        .div2{
+            position:absolute;
+            top:20%;
+            right:10%;
+            height:650px;
+            width:550px;
+            /* background-color: bisque; */
+            /* margin:-150px 0px 0px -250px; */
+        }
+        .div3{
+            position:absolute;
+            top:56%;
+            left:10%;
+            height:650px;
+            width:255px;
+            /* background-color: bisque; */
+            /* margin:-150px 0px 0px -250px; */
+        }
+        .div4{
+            position:absolute;
+            top:60%;
+            left:35%;
+            height:850px;
+            width:425px;
+            /* background-color: bisque; */
+            /* margin:-150px 0px 0px -250px; */
+        }
+        .div5{
+            position:absolute;
+            top:60%;
+            right:5%;
+            height:850px;
+            width:425px;
+            /* background-color: bisque; */
+            /* margin:-150px 0px 0px -250px; */
+        }
+        .div_to_report{
+            position:absolute;
+            top:90%;
+            right:5%;
+            height:50px;
+            width:50px;
+            /* background-color: bisque; */
+        }
+        .div_report{
+            position:absolute;
+            top:90%;
+            left:50%;
+            height:50px;
+            width:1000px;
+            margin: 0px 0px 0px -500px;
+            /* background-color: bisque; */
+        }
+        .div_back{
+            top:15%;
+            left:5%;
+            height:50px;
+            width:50px;
+            /* background-color: bisque; */
+        }
+        .button{
+            color:aliceblue;
+            background-color: dimgray;
+            font: icon;
+            vertical-align: middle;
+        }
+        .select{
+            color:aliceblue;
+            appearance:none;
+        }
+        .div_select{
+            position:absolute;
+            top:90%;
+            left:0%;
+            height:10px;
+            width:10px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <!-- <div style="height:100px; width:100px; left:50%; margin:0px 0px 0px -50px;">
+                <h1 class="title">DashBoard</h1>
+            </div> -->
+            <h1 class="title">{{time}} 주행기록</h1>
+            <!-- <input type="submit" class="button" onclick="location.href='/main'" value="선택"> -->
+        </div>
+    </header>
+    <div class="div_back">
+        <button type="button" style="WIDTH: 60pt; HEIGHT: 30pt" onclick="location.href='/main'">뒤로가기</button>
+    </div>
+    <!-- <hr> -->
+    <div class="div1">
+        <!--차트가 그려질 부분-->
+        <canvas id="myChart3"></canvas>
+    </div>
+    <div class="div2">
+        <!--차트가 그려질 부분-->
+        <canvas id="myChart4"></canvas>
+    </div>
+    <div class="div4">
+        <!--차트가 그려질 부분-->
+        <canvas id="myChart1"></canvas>
+    </div>
+    <div class="div3">
+        <!--차트가 그려질 부분-->
+        <canvas id="myChart2"></canvas>
+    </div>
+    <div class="div5">
+        <!--차트가 그려질 부분-->
+        <canvas id="myChart"></canvas>
+    </div>
+
+
+
+    
+    <script type="text/javascript">
+
+        
+        var context = document
+            .getElementById('myChart3')
+            .getContext('2d');
+        var a = {{data4}};
+        var b = {{label_len}};
+
+        var myChart3 = new Chart(context, {
+            type: 'line', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: b,
+                datasets: [
+                    { //데이터
+                        label: 'Velocity [km/h]', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: a,
+                        backgroundColor: [
+                            //색상
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                          
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                         
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    } ,
+                    
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+
+        var context = document
+            .getElementById('myChart4')
+            .getContext('2d');
+        var a = {{data5}};
+        var b = {{label_len}};
+
+
+        var myChart4 = new Chart(context, {
+            type: 'line', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: b,
+                datasets: [
+                    { //데이터
+                        label: 'Motor Torque [Nm]', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: a,
+                        backgroundColor: [
+                            //색상
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                          
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                            'rgba(53, 3, 252, 0.5)',
+                         
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    } ,
+                    
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+
+        var context = document
+            .getElementById('myChart1')
+            .getContext('2d');
+        var a = {{data2}};
+        
+
+        var myChart1 = new Chart(context, {
+            type: 'bar', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                        '1그룹','2그룹','3그룹'
+                ],
+                datasets: [
+                    { //데이터
+                        label: 'AirCon Power [kW]', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: a,
+                        backgroundColor: [
+                            //색상
+                            'rgba(1, 85, 254, 0.5)',
+                            'rgba(1, 85, 254, 0.5)',
+                            'rgba(1, 85, 254, 0.5)',
+                          
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(1, 85, 254, 0.5)',
+                            'rgba(1, 85, 254, 0.5)',
+                            'rgba(1, 85, 254, 0.5)',
+                         
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    } ,
+                    
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+
+        var context = document
+            .getElementById('myChart2')
+            .getContext('2d');
+        var a = {{data3}};
+        
+
+        var myChart2 = new Chart(context, {
+            type: 'pie', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                        '1그룹','2그룹','3그룹'
+                ],
+                
+                datasets: [
+                    { //데이터
+                         //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: a,
+                        backgroundColor: [
+                            //색상
+                            'rgba(255,0,0,0.5)',
+                            'rgba(64, 254, 22, 0.5)',
+                            'rgba(1, 85, 254, 0.5)',
+                          
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(255,0,0,0.5)',
+                            'rgba(64, 254, 22, 0.5)',
+                            'rgba(1, 85, 254, 0.5)',
+                         
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                        
+                    } ,
+                    
+                ]
+            },
+            options: {
+                title: {
+                            display: true,
+                            text: 'Heating Power CAN [kW]'
+                        },
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+
+        var context = document
+            .getElementById('myChart')
+            .getContext('2d');
+        var a = {{data1}};
+        
+
+        var myChart = new Chart(context, {
+            type: 'bar', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                        '1그룹','2그룹','3그룹'
+                ],
+                datasets: [
+                    { //데이터
+                        label: 'displayed SoC', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: a,
+                        backgroundColor: [
+                            //색상
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                          
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                         
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    } ,
+                    
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+        
+    </script>
+    <form method="get" action="/report/" name="time">
+    <div class="div_select">
+        <select class="select" name="time">
+        
+            <option value="{{time}}">{{time}}</option>
+        </select>
+    </div>
+    <div class="div_to_report">
+        <input type="submit" style="WIDTH: 60pt; HEIGHT: 30pt" value="리포트화면">
+    </div> 
+    <div class="div_report">
+        <p class="text2">{{time}} 주행기록 데이터</p>
+    </div>
+    </form>
+</body>
+</html>
