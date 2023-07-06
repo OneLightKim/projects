@@ -8,4 +8,4 @@ The composition is divided into three pages and consists of
 - a time series graph of major factors for the driving record,
 - a screen with a statement summarizing the user's driving record and providing problems with fuel efficiency degradation
 
-+ Final presentation material
+.. + Final presentation material
