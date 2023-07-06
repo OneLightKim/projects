@@ -1,6 +1,7 @@
-# projects
+# web viewer with python
 
-1. Analysis of mushroom data using various analysis tools
-2. Python, aduino, android code using image machine learning for smart airpurifier
-3. make Dashboard by django to visualize 'analysis of driving record of BMW i3 hatchback" 
-4. Web xlsx, hwpx, pptx, pdf File Viewer running by django
+We created a web environment that can be provided to users through the django framework.
+The screen composition is divided into a total of three depths. 
+- First, decide which file to upload: hwpx, xlsx, pptx, or pdf.
+- The second screen is to upload a file. A notice is provided that it cannot be executed unless it is a file in the correct format.
+- Third, it is a screen that converts an Xml file through python and provides it.
