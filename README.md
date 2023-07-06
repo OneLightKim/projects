@@ -1,6 +1,3 @@
-# projects
+# smart airfurifier
 
-1. Analysis of mushroom data using various analysis tools
-2. Python code using image machine learning for smart airpurifier
-3. make Dashboard by django to visualize 'analysis of driving record of BMW i3 hatchback" 
-4. Web xlsx, hwpx, pptx, pdf File Viewer running by django
+It consists of Arduino code for hardware operation of smart air purifiers and code for communication with Firebase.
