@@ -1,6 +1,5 @@
 # analysis of driving records
 
-1. Analysis of mushroom data using various analysis tools
-2. Python, aduino, android code using image machine learning for smart airpurifier
-3. make Dashboard by django to visualize 'analysis of driving record of BMW i3 hatchback" 
-4. Web xlsx, hwpx, pptx, pdf File Viewer running by django
+This is the summer and winter driving dataset of bmwi3 hatchback. The attributes of the dataset vary from 28 to 45 and there are a total of 68 original datasets, 32 summer and 36 winter.
+
+The TripA and TripB folders are the original driving datasets for summer and winter, respectively, and New TripA and New TripB are datasets that select major attributes through correlation, scatterplot, and regression analysis between soc changes and attributes according to driving.
