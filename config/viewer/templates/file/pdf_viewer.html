@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/stylesheet/pptx_viewer.css' %}">
+    <!-- <style src="{% static '/stylesheet/pptx_viewer.css' %}"></style> -->
+    <!-- <script src="{% static '/javascript/pptx_viewer.js' %}"></script> -->
+    <!-- <link rel="script" href="{% static '/javascript/pptx_viewer.js' %}"> -->
+</head>
+<body>
+    <header>
+        <div class = 'container'>
+            <!-- <a href="http://www.mayeye.net/"><link href="{% static '/image/mayeyerogo.png' %}" class="logo"></a>-->
+            <div class = 'container_img'>
+                <a href="http://www.mayeye.net"><img src="{% static 'image/mayeyerogo.png' %}"></a>
+            </div>
+        </div>
+    </header>
+    <h1 class="text1">이곳에 pdf파일을 업로드해주세요</h1>
+
+    <!-- dropzone -->
+    <!-- <div id="dropzone">
+        <form action="https://httpbin.org/post" class="dropzone needsclick" id="demo-upload">
+          <div class="dz-message needsclick">
+            <span class="text">
+            <img src="{% static 'image/img_file.png' %}">
+            이곳에 파일을 끌어오거나 클릭하여 업로드 해주세요.
+            </span>
+            <span class="plus">+</span>
+          </div>
+        </form>
+    </div> -->
+    <div class="div5">
+        <form action="{% url 'file:pdf_viewer' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file">
+            <input type="submit" value="전송">
+        </form>
+    </div>
+
+    <div style="position:absolute; left:48%; bottom:15%;">
+        <button type="button" style="WIDTH: 60pt; HEIGHT: 40pt text-align=center;" onclick="location.href='/main'">뒤로가기</button>
+    </div>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- Plugin -->
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css" />
+    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+</body>
+</html>
