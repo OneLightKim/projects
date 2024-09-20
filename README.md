@@ -1,4 +1,4 @@
-# projects
+# Projects
 
 00. Analysis of mushroom data using various analysis tools
 01. Python, aduino, android code using image machine learning for smart airpurifier
